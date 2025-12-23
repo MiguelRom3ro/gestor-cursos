@@ -1,5 +1,11 @@
 # GestorCursos
 
+## Version 1.0.0
+ - Fecha: 22/12/2025
+ - Autor: Miguel Romero
+ - Cambios:
+   - feat: agregar la parte visual del inicio de sesión y registro de usuarios.
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.2.
 
 ## Development server
