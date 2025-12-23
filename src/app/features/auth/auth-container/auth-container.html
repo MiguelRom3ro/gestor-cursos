@@ -1,0 +1,481 @@
+<div
+  class="relative w-full h-screen bg-white overflow-hidden"
+  id="container"
+  [class.right-panel-active]="isRightPanelActive"
+>
+  <!-- AQUI COMIENZA EL REGISTRO -->
+  <div
+    class="w-full lg:w-1/2 flex flex-col justify-start px-8 md:px-16 lg:px-24 py-12 form-container sign-up-container absolute top-0 h-full transition-all duration-700 ease-in-out overflow-y-auto"
+  >
+    <div class="mb-10 flex items-center gap-3">
+      <div class="flex items-center justify-center p-2 bg-blue-100 rounded-lg shadow-sm">
+        <i class="pi pi-graduation-cap text-blue-700 text-2xl"></i>
+      </div>
+      <span class="text-2xl font-extrabold text-gray-900 tracking-tight"> Gestor de cursos </span>
+    </div>
+
+    <div class="mb-8">
+      <h3 class="text-gray-500 text-sm font-medium uppercase tracking-wide">
+        Comienza a aprender HOY!
+      </h3>
+      <h2 class="text-3xl font-extrabold text-gray-900 mt-2">Registrate</h2>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="space-y-5">
+      <div class="relative">
+        <label for="register-name" class="block text-sm font-medium text-gray-700 mb-1 pl-1"
+          >Nombre/s</label
+        >
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="pi pi-envelope text-gray-400"></i>
+          </div>
+          <input
+            id="register-name"
+            type="text"
+            formControlName="register-name"
+            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+            placeholder="Nombre/s"
+          />
+        </div>
+        @if (registerForm.get('register-name')?.hasError('required') &&
+        registerForm.get('register-name')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">Por favor, ingrese su nombre.</p>
+        } @if (registerForm.get('register-name')?.hasError('maxLength') &&
+        registerForm.get('register-name')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          El nombre no puede tener mas de 255 caracteres.
+        </p>
+        } @if (registerForm.get('register-name')?.hasError('minLength') &&
+        registerForm.get('register-name')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          El nombre debe tener por lo menos 3 caracteres.
+        </p>
+        } @if (registerForm.get('register-name')?.hasError('pattern') &&
+        registerForm.get('register-name')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          No se admiten numeros, ni caracteres especiales.
+        </p>
+        }
+      </div>
+
+      <div class="relative">
+        <label for="register-last-name" class="block text-sm font-medium text-gray-700 mb-1 pl-1"
+          >Apellido/s</label
+        >
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="pi pi-envelope text-gray-400"></i>
+          </div>
+          <input
+            id="register-last-name"
+            type="text"
+            formControlName="register-last-name"
+            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+            placeholder="Apellido/s"
+          />
+        </div>
+        @if (registerForm.get('register-last-name')?.hasError('required') &&
+        registerForm.get('register-last-name')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">Por favor, ingrese su/s apellido/s.</p>
+        } @if (registerForm.get('register-last-name')?.hasError('maxLength') &&
+        registerForm.get('register-last-name')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          El/los apellido/s no pueden tener mas de 255 caracteres.
+        </p>
+        } @if (registerForm.get('register-last-name')?.hasError('minLength') &&
+        registerForm.get('register-last-name')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          El/los apellido/s deben tener por lo menos 3 caracteres.
+        </p>
+        } @if (registerForm.get('register-last-name')?.hasError('pattern') &&
+        registerForm.get('register-last-name')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          No se admiten numeros, ni caracteres especiales.
+        </p>
+        }
+      </div>
+
+      <div class="relative">
+        <label for="register-email" class="block text-sm font-medium text-gray-700 mb-1 pl-1"
+          >Correo</label
+        >
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="pi pi-envelope text-gray-400"></i>
+          </div>
+          <input
+            id="register-email"
+            type="email"
+            formControlName="register-email"
+            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+            placeholder="example@email.com"
+          />
+        </div>
+        @if (registerForm.get('register-email')?.invalid &&
+        registerForm.get('register-email')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          Por favor, ingrese un correo electrónico válido.
+        </p>
+        }
+      </div>
+
+      <div class="relative">
+        <label for="register-birthdate" class="block text-sm font-medium text-gray-700 mb-1 pl-1">
+          Fecha de nacimiento
+        </label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="pi pi-calendar text-gray-400"></i>
+          </div>
+          <input
+            id="register-birthdate"
+            type="date"
+            formControlName="birthdate"
+            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+          />
+        </div>
+        @if (registerForm.get('birthdate')?.hasError('required') &&
+        registerForm.get('birthdate')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">La fecha de nacimiento es requerida.</p>
+        } @if (registerForm.get('birthdate')?.hasError('tooYoung') &&
+        registerForm.get('birthdate')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">Debes tener al menos 10 años para registrarte.</p>
+        }
+      </div>
+
+      <div class="relative">
+        <label for="register-password" class="block text-sm font-medium text-gray-700 mb-1 pl-1"
+          >Contraseña</label
+        >
+        <div class="relative">
+          <input
+            id="register-password"
+            [type]="registerPasswordVisible ? 'text' : 'password'"
+            formControlName="register-password"
+            class="block w-full pl-4 pr-10 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+            placeholder="••••••••"
+          />
+
+          <div
+            class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+            (click)="toggleRegisterPassword()"
+          >
+            <i
+              class="pi text-gray-400 hover:text-gray-600 transition-colors"
+              [class.pi-eye]="!registerPasswordVisible"
+              [class.pi-eye-slash]="registerPasswordVisible"
+            ></i>
+          </div>
+        </div>
+        @if (registerForm.get('register-password')?.hasError('required') &&
+        registerForm.get('register-password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">La contraseña es requerida.</p>
+        } @if (registerForm.get('register-password')?.hasError('minlength') &&
+        registerForm.get('register-password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          La contraseña debe tener al menos 8 caracteres.
+        </p>
+        } @if (registerForm.get('register-password')?.hasError('maxlength') &&
+        registerForm.get('register-password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">La contraseña debe tener maximo 16 caracteres.</p>
+        } @if (registerForm.get('register-password')?.hasError('pattern') &&
+        registerForm.get('register-password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y
+          un carácter especial (@, $, !, %, *, ?, &).
+        </p>
+        }
+      </div>
+
+      <div class="relative">
+        <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-1 pl-1"
+          >Confirmar contraseña</label
+        >
+        <div class="relative">
+          <input
+            id="confirm-password"
+            [type]="confirmPasswordVisible ? 'text' : 'password'"
+            formControlName="confirm-password"
+            class="block w-full pl-4 pr-10 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+            placeholder="••••••••"
+          />
+
+          <div
+            class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+            (click)="toggleConfirmPassword()"
+          >
+            <i
+              class="pi text-gray-400 hover:text-gray-600 transition-colors"
+              [class.pi-eye]="!confirmPasswordVisible"
+              [class.pi-eye-slash]="confirmPasswordVisible"
+            ></i>
+          </div>
+        </div>
+        @if (registerForm.get('confirm-password')?.hasError('required') &&
+        registerForm.get('confirm-password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">La contraseña es requerida.</p>
+        } @if (registerForm.get('confirm-password')?.hasError('minlength') &&
+        registerForm.get('confirm-password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          La contraseña debe tener al menos 8 caracteres.
+        </p>
+        } @if (registerForm.get('confirm-password')?.hasError('maxlength') &&
+        registerForm.get('confirm-password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">La contraseña debe tener maximo 16 caracteres.</p>
+        } @if (registerForm.get('confirm-password')?.hasError('pattern') &&
+        registerForm.get('confirm-password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y
+          un carácter especial (@, $, !, %, *, ?, &).
+        </p>
+        }
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="registerForm.invalid"
+        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all transform active:scale-95 disabled:bg-blue-300 disabled:cursor-not-allowed mt-4"
+      >
+        Iniciar sesión
+      </button>
+    </form>
+
+    <div class="relative mt-8 mb-6">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-200"></div>
+      </div>
+      <div class="relative flex justify-center text-sm">
+        <span class="px-4 bg-white text-gray-400">o iniciar sesión con</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-3">
+      <button
+        type="button"
+        class="flex justify-center items-center py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+      >
+        <i class="pi pi-facebook text-blue-600 text-2xl"></i>
+      </button>
+
+      <button
+        type="button"
+        class="flex justify-center items-center py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+            fill="#4285F4"
+          />
+          <path
+            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+            fill="#34A853"
+          />
+          <path
+            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+            fill="#FBBC05"
+          />
+          <path
+            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+            fill="#EA4335"
+          />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="flex justify-center items-center py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+      >
+        <i class="pi pi-apple text-black text-2xl"></i>
+      </button>
+    </div>
+
+    <p class="mt-8 text-center text-sm text-gray-600">
+      Ya tienes una cuenta?
+      <a
+        (click)="togglePanel(false)"
+        class="font-medium text-blue-700 hover:text-blue-500 transition-colors"
+        >Iniciar sesión</a
+      >
+    </p>
+  </div>
+
+  <!-- AQUI COMIENZA EL INICIO DE SESION -->
+
+  <div
+    class="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-12 form-container sign-in-container absolute top-0 h-full transition-all duration-700 ease-in-out z-20"
+  >
+    <div class="mb-10 flex items-center gap-3">
+      <div class="flex items-center justify-center p-2 bg-blue-100 rounded-lg shadow-sm">
+        <i class="pi pi-graduation-cap text-blue-700 text-2xl"></i>
+      </div>
+      <span class="text-2xl font-extrabold text-gray-900 tracking-tight"> Gestor de cursos </span>
+    </div>
+
+    <div class="mb-8">
+      <h3 class="text-gray-500 text-sm font-medium uppercase tracking-wide">
+        Comienza a aprender HOY!
+      </h3>
+      <h2 class="text-3xl font-extrabold text-gray-900 mt-2">Iniciar sesión</h2>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="space-y-5">
+      <div class="relative group">
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1 pl-1">Correo</label>
+        <div class="relative">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="pi pi-envelope text-gray-400"></i>
+          </div>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+            placeholder="example@email.com"
+          />
+        </div>
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          Por favor, ingrese un correo electrónico válido.
+        </p>
+        }
+      </div>
+
+      <div class="relative">
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1 pl-1"
+          >Contraseña</label
+        >
+        <div class="relative">
+          <input
+            id="password"
+            [type]="loginPasswordVisible ? 'text' : 'password'"
+            formControlName="password"
+            class="block w-full pl-4 pr-10 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all"
+            placeholder="••••••••"
+          />
+
+          <div
+            class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
+            (click)="toggleLoginPassword()"
+          >
+            <i
+              class="pi text-gray-400 hover:text-gray-600 transition-colors"
+              [class.pi-eye]="!loginPasswordVisible"
+              [class.pi-eye-slash]="loginPasswordVisible"
+            ></i>
+          </div>
+        </div>
+        @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched)
+        {
+        <p class="mt-1 text-xs text-red-500 pl-1">La contraseña es requerida.</p>
+        } @if (loginForm.get('password')?.hasError('minlength') &&
+        loginForm.get('password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          La contraseña debe tener al menos 8 caracteres.
+        </p>
+        } @if (loginForm.get('password')?.hasError('maxlength') &&
+        loginForm.get('password')?.touched) {
+        <p class="mt-1 text-xs text-red-500 pl-1">La contraseña debe tener maximo 16 caracteres.</p>
+        } @if (loginForm.get('password')?.hasError('pattern') && loginForm.get('password')?.touched)
+        {
+        <p class="mt-1 text-xs text-red-500 pl-1">
+          La contraseña debe contener al menos una letra minúscula, una letra mayúscula, un número y
+          un carácter especial (@, $, !, %, *, ?, &).
+        </p>
+        }
+      </div>
+
+      <button
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all transform active:scale-95 disabled:bg-blue-300 disabled:cursor-not-allowed mt-4"
+      >
+        Iniciar sesión
+      </button>
+    </form>
+
+    <div class="relative mt-8 mb-6">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gray-200"></div>
+      </div>
+      <div class="relative flex justify-center text-sm">
+        <span class="px-4 bg-white text-gray-400">o iniciar sesión con</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-3">
+      <button
+        type="button"
+        class="flex justify-center items-center py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+      >
+        <i class="pi pi-facebook text-blue-600 text-2xl"></i>
+      </button>
+
+      <button
+        type="button"
+        class="flex justify-center items-center py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+            fill="#4285F4"
+          />
+          <path
+            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+            fill="#34A853"
+          />
+          <path
+            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+            fill="#FBBC05"
+          />
+          <path
+            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+            fill="#EA4335"
+          />
+        </svg>
+      </button>
+
+      <button
+        type="button"
+        class="flex justify-center items-center py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+      >
+        <i class="pi pi-apple text-black text-2xl"></i>
+      </button>
+    </div>
+
+    <p class="mt-8 text-center text-sm text-gray-600">
+      No tienes una cuenta?
+      <a
+        (click)="togglePanel(true)"
+        class="font-medium text-blue-700 hover:text-blue-500 transition-colors"
+        >Registrarse</a
+      >
+    </p>
+  </div>
+
+  <div
+    class="overlay-container absolute top-0 left-1/2 w-1/2 h-full overflow-hidden transition-transform duration-700 ease-in-out z-50 hidden lg:block"
+  >
+    <div
+      class="overlay relative -left-full h-full w-[200%] transform transition-transform duration-700 ease-in-out text-white"
+    >
+      <div
+        class="overlay-panel overlay-left absolute flex flex-col items-center justify-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-700 ease-in-out pr-10"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
+          class="absolute inset-0 w-full h-full object-cover -z-10"
+        />
+      </div>
+
+      <div
+        class="overlay-panel overlay-right absolute right-0 flex flex-col items-center justify-center top-0 h-full w-1/2 transform translate-x-0 transition-transform duration-700 ease-in-out pl-10"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
+          class="absolute inset-0 w-full h-full object-cover -z-10"
+        />
+      </div>
+    </div>
+  </div>
+</div>
